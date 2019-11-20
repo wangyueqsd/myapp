@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.app.dao.FrontAccountInfoMapper">
+  <resultMap id="BaseResultMap" type="com.my.app.entity.FrontAccountInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="id_card_no" jdbcType="VARCHAR" property="id_card_no" />
+    <result column="auth_status" jdbcType="INTEGER" property="auth_status" />
+    <result column="phone_no" jdbcType="BIGINT" property="phone_no" />
+    <result column="account_status" jdbcType="INTEGER" property="account_status" />
+    <result column="active_status" jdbcType="INTEGER" property="active_status" />
+    <result column="third_cust_id" jdbcType="VARCHAR" property="third_cust_id" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="created_time" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updated_time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, id_card_no, auth_status, phone_no, account_status, active_status, third_cust_id, 
+    token, creator, updator, created_time, updated_time
+  </sql>
+  <select id="selectByExample" parameterType="com.my.app.entity.FrontAccountInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from front_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from front_account_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from front_account_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.my.app.entity.FrontAccountInfoExample">
+    delete from front_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.my.app.entity.FrontAccountInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_account_info (id_card_no, auth_status, phone_no, 
+      account_status, active_status, third_cust_id, 
+      token, creator, updator, 
+      created_time, updated_time)
+    values (#{id_card_no,jdbcType=VARCHAR}, #{auth_status,jdbcType=INTEGER}, #{phone_no,jdbcType=BIGINT}, 
+      #{account_status,jdbcType=INTEGER}, #{active_status,jdbcType=INTEGER}, #{third_cust_id,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{updator,jdbcType=VARCHAR}, 
+      #{created_time,jdbcType=TIMESTAMP}, #{updated_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.app.entity.FrontAccountInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id_card_no != null">
+        id_card_no,
+      </if>
+      <if test="auth_status != null">
+        auth_status,
+      </if>
+      <if test="phone_no != null">
+        phone_no,
+      </if>
+      <if test="account_status != null">
+        account_status,
+      </if>
+      <if test="active_status != null">
+        active_status,
+      </if>
+      <if test="third_cust_id != null">
+        third_cust_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="created_time != null">
+        created_time,
+      </if>
+      <if test="updated_time != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id_card_no != null">
+        #{id_card_no,jdbcType=VARCHAR},
+      </if>
+      <if test="auth_status != null">
+        #{auth_status,jdbcType=INTEGER},
+      </if>
+      <if test="phone_no != null">
+        #{phone_no,jdbcType=BIGINT},
+      </if>
+      <if test="account_status != null">
+        #{account_status,jdbcType=INTEGER},
+      </if>
+      <if test="active_status != null">
+        #{active_status,jdbcType=INTEGER},
+      </if>
+      <if test="third_cust_id != null">
+        #{third_cust_id,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="created_time != null">
+        #{created_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated_time != null">
+        #{updated_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.my.app.entity.FrontAccountInfoExample" resultType="java.lang.Long">
+    select count(*) from front_account_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update front_account_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.id_card_no != null">
+        id_card_no = #{record.id_card_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auth_status != null">
+        auth_status = #{record.auth_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone_no != null">
+        phone_no = #{record.phone_no,jdbcType=BIGINT},
+      </if>
+      <if test="record.account_status != null">
+        account_status = #{record.account_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.active_status != null">
+        active_status = #{record.active_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.third_cust_id != null">
+        third_cust_id = #{record.third_cust_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updator != null">
+        updator = #{record.updator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created_time != null">
+        created_time = #{record.created_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated_time != null">
+        updated_time = #{record.updated_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update front_account_info
+    set id = #{record.id,jdbcType=INTEGER},
+      id_card_no = #{record.id_card_no,jdbcType=VARCHAR},
+      auth_status = #{record.auth_status,jdbcType=INTEGER},
+      phone_no = #{record.phone_no,jdbcType=BIGINT},
+      account_status = #{record.account_status,jdbcType=INTEGER},
+      active_status = #{record.active_status,jdbcType=INTEGER},
+      third_cust_id = #{record.third_cust_id,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      updator = #{record.updator,jdbcType=VARCHAR},
+      created_time = #{record.created_time,jdbcType=TIMESTAMP},
+      updated_time = #{record.updated_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.my.app.entity.FrontAccountInfo">
+    update front_account_info
+    <set>
+      <if test="id_card_no != null">
+        id_card_no = #{id_card_no,jdbcType=VARCHAR},
+      </if>
+      <if test="auth_status != null">
+        auth_status = #{auth_status,jdbcType=INTEGER},
+      </if>
+      <if test="phone_no != null">
+        phone_no = #{phone_no,jdbcType=BIGINT},
+      </if>
+      <if test="account_status != null">
+        account_status = #{account_status,jdbcType=INTEGER},
+      </if>
+      <if test="active_status != null">
+        active_status = #{active_status,jdbcType=INTEGER},
+      </if>
+      <if test="third_cust_id != null">
+        third_cust_id = #{third_cust_id,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="created_time != null">
+        created_time = #{created_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated_time != null">
+        updated_time = #{updated_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.my.app.entity.FrontAccountInfo">
+    update front_account_info
+    set id_card_no = #{id_card_no,jdbcType=VARCHAR},
+      auth_status = #{auth_status,jdbcType=INTEGER},
+      phone_no = #{phone_no,jdbcType=BIGINT},
+      account_status = #{account_status,jdbcType=INTEGER},
+      active_status = #{active_status,jdbcType=INTEGER},
+      third_cust_id = #{third_cust_id,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      updator = #{updator,jdbcType=VARCHAR},
+      created_time = #{created_time,jdbcType=TIMESTAMP},
+      updated_time = #{updated_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
