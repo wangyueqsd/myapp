@@ -17,8 +17,9 @@ public class FrontBankInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	//非包装类会有默认值
 
 	@Column(name="bank_card_no")
 	private String bankCardNo;
@@ -29,7 +30,7 @@ public class FrontBankInfo implements Serializable {
 	@Column(name="bank_name")
 	private String bankName;
 
-	@Column(name="created_time")
+	@Column(name="created_time",insertable = false, updatable = false)
 	private Timestamp createdTime;
 
 	private String creator;
@@ -50,7 +51,7 @@ public class FrontBankInfo implements Serializable {
 	@Column(name="request_no")
 	private String requestNo;
 
-	@Column(name="updated_time")
+	@Column(name="updated_time",insertable = false, updatable = false)
 	private Timestamp updatedTime;
 
 	private String updator;

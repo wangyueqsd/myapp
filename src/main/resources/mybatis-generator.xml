@@ -44,16 +44,21 @@
 		</sqlMapGenerator>
  
 		<!--生成Dao类存放位置 -->
-		<javaClientGenerator type="XMLMAPPER"
+		<!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码  
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象  
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象  
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口  
+        -->
+		<javaClientGenerator type="MIXEDMAPPER"
 			targetPackage="com.my.app.dao" targetProject="${project}">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
  
 		<!--生成对应表及类名 -->
-		<table tableName="front_account_info" enableCountByExample="true"
+		<table tableName="front_handle_record" enableCountByExample="true"
 			enableUpdateByExample="true" enableDeleteByExample="true"
 			enableSelectByExample="true" selectByExampleQueryId="true">
-			<property name="useActualColumnNames" value="true" />
+			<property name="useActualColumnNames" value="false" />
 			<!-- 需要插入时返回主键值，请将此属性打开，column值为主键的列明 -->
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 		</table>
