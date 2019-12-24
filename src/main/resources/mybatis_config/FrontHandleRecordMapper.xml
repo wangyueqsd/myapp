@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.app.dao.FrontHandleRecordMapper">
+  <resultMap id="BaseResultMap" type="com.my.app.entity.FrontHandleRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="order_no" />
+    <result column="trade_money" jdbcType="VARCHAR" property="trade_money" />
+    <result column="fee_money" jdbcType="VARCHAR" property="fee_money" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobile_phone" />
+    <result column="platform_type" jdbcType="VARCHAR" property="platform_type" />
+    <result column="app_type" jdbcType="VARCHAR" property="app_type" />
+    <result column="product_type" jdbcType="VARCHAR" property="product_type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="id_card" jdbcType="VARCHAR" property="id_card" />
+    <result column="custacct_id" jdbcType="VARCHAR" property="custacct_id" />
+    <result column="bank_no" jdbcType="VARCHAR" property="bank_no" />
+    <result column="bank_code" jdbcType="VARCHAR" property="bank_code" />
+    <result column="bank_phone" jdbcType="VARCHAR" property="bank_phone" />
+    <result column="trade_flow_id" jdbcType="VARCHAR" property="trade_flow_id" />
+    <result column="app_repayment_flow_id" jdbcType="VARCHAR" property="app_repayment_flow_id" />
+    <result column="bank_flow_id" jdbcType="VARCHAR" property="bank_flow_id" />
+    <result column="record_status" jdbcType="VARCHAR" property="record_status" />
+    <result column="status_desc" jdbcType="VARCHAR" property="status_desc" />
+    <result column="handle_type" jdbcType="VARCHAR" property="handle_type" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="return_url" jdbcType="VARCHAR" property="return_url" />
+    <result column="unique_identity" jdbcType="VARCHAR" property="unique_identity" />
+    <result column="pay_success_time" jdbcType="TIMESTAMP" property="pay_success_time" />
+    <result column="status_change_time" jdbcType="TIMESTAMP" property="status_change_time" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="created_at" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updated_at" />
+    <result column="withdraw_type" jdbcType="VARCHAR" property="withdraw_type" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_no, trade_money, fee_money, mobile_phone, platform_type, app_type, product_type, 
+    name, id_card, custacct_id, bank_no, bank_code, bank_phone, trade_flow_id, app_repayment_flow_id, 
+    bank_flow_id, record_status, status_desc, handle_type, remark, return_url, unique_identity, 
+    pay_success_time, status_change_time, created_at, updated_at, withdraw_type
+  </sql>
+  <select id="selectByExample" parameterType="com.my.app.entity.FrontHandleRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from front_handle_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.my.app.entity.FrontHandleRecordExample">
+    delete from front_handle_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.my.app.entity.FrontHandleRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_handle_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="order_no != null">
+        order_no,
+      </if>
+      <if test="trade_money != null">
+        trade_money,
+      </if>
+      <if test="fee_money != null">
+        fee_money,
+      </if>
+      <if test="mobile_phone != null">
+        mobile_phone,
+      </if>
+      <if test="platform_type != null">
+        platform_type,
+      </if>
+      <if test="app_type != null">
+        app_type,
+      </if>
+      <if test="product_type != null">
+        product_type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="id_card != null">
+        id_card,
+      </if>
+      <if test="custacct_id != null">
+        custacct_id,
+      </if>
+      <if test="bank_no != null">
+        bank_no,
+      </if>
+      <if test="bank_code != null">
+        bank_code,
+      </if>
+      <if test="bank_phone != null">
+        bank_phone,
+      </if>
+      <if test="trade_flow_id != null">
+        trade_flow_id,
+      </if>
+      <if test="app_repayment_flow_id != null">
+        app_repayment_flow_id,
+      </if>
+      <if test="bank_flow_id != null">
+        bank_flow_id,
+      </if>
+      <if test="record_status != null">
+        record_status,
+      </if>
+      <if test="status_desc != null">
+        status_desc,
+      </if>
+      <if test="handle_type != null">
+        handle_type,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="return_url != null">
+        return_url,
+      </if>
+      <if test="unique_identity != null">
+        unique_identity,
+      </if>
+      <if test="pay_success_time != null">
+        pay_success_time,
+      </if>
+      <if test="status_change_time != null">
+        status_change_time,
+      </if>
+      <if test="created_at != null">
+        created_at,
+      </if>
+      <if test="updated_at != null">
+        updated_at,
+      </if>
+      <if test="withdraw_type != null">
+        withdraw_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="order_no != null">
+        #{order_no,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_money != null">
+        #{trade_money,jdbcType=VARCHAR},
+      </if>
+      <if test="fee_money != null">
+        #{fee_money,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile_phone != null">
+        #{mobile_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="platform_type != null">
+        #{platform_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_type != null">
+        #{app_type,jdbcType=VARCHAR},
+      </if>
+      <if test="product_type != null">
+        #{product_type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id_card != null">
+        #{id_card,jdbcType=VARCHAR},
+      </if>
+      <if test="custacct_id != null">
+        #{custacct_id,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_no != null">
+        #{bank_no,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_code != null">
+        #{bank_code,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_phone != null">
+        #{bank_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_flow_id != null">
+        #{trade_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="app_repayment_flow_id != null">
+        #{app_repayment_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_flow_id != null">
+        #{bank_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record_status != null">
+        #{record_status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null">
+        #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="handle_type != null">
+        #{handle_type,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="return_url != null">
+        #{return_url,jdbcType=VARCHAR},
+      </if>
+      <if test="unique_identity != null">
+        #{unique_identity,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_success_time != null">
+        #{pay_success_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status_change_time != null">
+        #{status_change_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created_at != null">
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated_at != null">
+        #{updated_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withdraw_type != null">
+        #{withdraw_type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.my.app.entity.FrontHandleRecordExample" resultType="java.lang.Long">
+    select count(*) from front_handle_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update front_handle_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.order_no != null">
+        order_no = #{record.order_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trade_money != null">
+        trade_money = #{record.trade_money,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fee_money != null">
+        fee_money = #{record.fee_money,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile_phone != null">
+        mobile_phone = #{record.mobile_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform_type != null">
+        platform_type = #{record.platform_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app_type != null">
+        app_type = #{record.app_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.product_type != null">
+        product_type = #{record.product_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id_card != null">
+        id_card = #{record.id_card,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custacct_id != null">
+        custacct_id = #{record.custacct_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_no != null">
+        bank_no = #{record.bank_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_code != null">
+        bank_code = #{record.bank_code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_phone != null">
+        bank_phone = #{record.bank_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trade_flow_id != null">
+        trade_flow_id = #{record.trade_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app_repayment_flow_id != null">
+        app_repayment_flow_id = #{record.app_repayment_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_flow_id != null">
+        bank_flow_id = #{record.bank_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.record_status != null">
+        record_status = #{record.record_status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status_desc != null">
+        status_desc = #{record.status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handle_type != null">
+        handle_type = #{record.handle_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.return_url != null">
+        return_url = #{record.return_url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unique_identity != null">
+        unique_identity = #{record.unique_identity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pay_success_time != null">
+        pay_success_time = #{record.pay_success_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status_change_time != null">
+        status_change_time = #{record.status_change_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.created_at != null">
+        created_at = #{record.created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated_at != null">
+        updated_at = #{record.updated_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.withdraw_type != null">
+        withdraw_type = #{record.withdraw_type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update front_handle_record
+    set id = #{record.id,jdbcType=INTEGER},
+      order_no = #{record.order_no,jdbcType=VARCHAR},
+      trade_money = #{record.trade_money,jdbcType=VARCHAR},
+      fee_money = #{record.fee_money,jdbcType=VARCHAR},
+      mobile_phone = #{record.mobile_phone,jdbcType=VARCHAR},
+      platform_type = #{record.platform_type,jdbcType=VARCHAR},
+      app_type = #{record.app_type,jdbcType=VARCHAR},
+      product_type = #{record.product_type,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      id_card = #{record.id_card,jdbcType=VARCHAR},
+      custacct_id = #{record.custacct_id,jdbcType=VARCHAR},
+      bank_no = #{record.bank_no,jdbcType=VARCHAR},
+      bank_code = #{record.bank_code,jdbcType=VARCHAR},
+      bank_phone = #{record.bank_phone,jdbcType=VARCHAR},
+      trade_flow_id = #{record.trade_flow_id,jdbcType=VARCHAR},
+      app_repayment_flow_id = #{record.app_repayment_flow_id,jdbcType=VARCHAR},
+      bank_flow_id = #{record.bank_flow_id,jdbcType=VARCHAR},
+      record_status = #{record.record_status,jdbcType=VARCHAR},
+      status_desc = #{record.status_desc,jdbcType=VARCHAR},
+      handle_type = #{record.handle_type,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      return_url = #{record.return_url,jdbcType=VARCHAR},
+      unique_identity = #{record.unique_identity,jdbcType=VARCHAR},
+      pay_success_time = #{record.pay_success_time,jdbcType=TIMESTAMP},
+      status_change_time = #{record.status_change_time,jdbcType=TIMESTAMP},
+      created_at = #{record.created_at,jdbcType=TIMESTAMP},
+      updated_at = #{record.updated_at,jdbcType=TIMESTAMP},
+      withdraw_type = #{record.withdraw_type,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.my.app.entity.FrontHandleRecord">
+    update front_handle_record
+    <set>
+      <if test="order_no != null">
+        order_no = #{order_no,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_money != null">
+        trade_money = #{trade_money,jdbcType=VARCHAR},
+      </if>
+      <if test="fee_money != null">
+        fee_money = #{fee_money,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile_phone != null">
+        mobile_phone = #{mobile_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="platform_type != null">
+        platform_type = #{platform_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_type != null">
+        app_type = #{app_type,jdbcType=VARCHAR},
+      </if>
+      <if test="product_type != null">
+        product_type = #{product_type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id_card != null">
+        id_card = #{id_card,jdbcType=VARCHAR},
+      </if>
+      <if test="custacct_id != null">
+        custacct_id = #{custacct_id,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_no != null">
+        bank_no = #{bank_no,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_code != null">
+        bank_code = #{bank_code,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_phone != null">
+        bank_phone = #{bank_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_flow_id != null">
+        trade_flow_id = #{trade_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="app_repayment_flow_id != null">
+        app_repayment_flow_id = #{app_repayment_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_flow_id != null">
+        bank_flow_id = #{bank_flow_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record_status != null">
+        record_status = #{record_status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null">
+        status_desc = #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="handle_type != null">
+        handle_type = #{handle_type,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="return_url != null">
+        return_url = #{return_url,jdbcType=VARCHAR},
+      </if>
+      <if test="unique_identity != null">
+        unique_identity = #{unique_identity,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_success_time != null">
+        pay_success_time = #{pay_success_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status_change_time != null">
+        status_change_time = #{status_change_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created_at != null">
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated_at != null">
+        updated_at = #{updated_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withdraw_type != null">
+        withdraw_type = #{withdraw_type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

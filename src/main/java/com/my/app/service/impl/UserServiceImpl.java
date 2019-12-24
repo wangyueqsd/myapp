@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -45,6 +44,7 @@ public class UserServiceImpl implements UserService {
 		
 		List<Map<String,Object>> list1 = frontAccountInfoExtMapper.findAccountAndBankInfo("622927197809193707");
 		JSONObject.toJSONString(list1);
+		result.getData().put("list1", list1);
 		return result;
 	}
 
