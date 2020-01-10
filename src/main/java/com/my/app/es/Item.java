@@ -1,5 +1,7 @@
 package com.my.app.es;
 
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -7,10 +9,15 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import lombok.Data;
 
-@Document(indexName = "item",type = "docs", shards = 1, replicas = 0)
+@Document(indexName = "item",type = "docs")
 @Data
-public class Item {
+public class Item implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Item() {
 		super();
 	}
@@ -21,7 +28,7 @@ public class Item {
 	 *@Author: https://blog.csdn.net/chen_2890
 	 */
     @Id 
-    private Long id;
+    private String id;
     
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String title; //标题
@@ -38,7 +45,7 @@ public class Item {
     @Field(index = false, type = FieldType.Keyword)
     private String images; // 图片地址
 
-	public Item(Long id, String title, String category, String brand, Double price, String images) {
+	public Item(String id, String title, String category, String brand, Double price, String images) {
 		super();
 		this.id = id;
 		this.title = title;

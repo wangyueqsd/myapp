@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
-import org.apache.lucene.util.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,17 +61,17 @@ public class EsController {
 	@GetMapping("deleteIndex")
 	@ResponseBody
 	public Object deleteIndex() {
-		
-		return "";
+		elasticsearchTemplate.deleteIndex("item");
+		return "SUCCESS";
 	}
 	
 	@GetMapping("saveObject")
 	@ResponseBody
 	public Object saveObject() {
-		Item item = new Item(1L, "小小米手机7", " 手机", "小米", 34439.00, "http://image.baidu.com/13123.jpg");
+		Item item = new Item("1", "小小米手机7", " 手机", "小米", 34439.00, "http://image.baidu.com/13123.jpg");
 		itemRepository.save(item);
-		Item item2 = new Item(2L, "小米", " 手机", "小米", 349.00, "http://image.baidu.com/13123.jpg");
-		Item item3 = new Item(3L, "手机7", " 手机", "小米", 3459.00, "http://image.baidu.com/13123.jpg");
+		Item item2 = new Item("2", "小米", " 手机", "小米", 349.00, "http://image.baidu.com/13123.jpg");
+		Item item3 = new Item("3", "手机7", " 手机", "小米", 3459.00, "http://image.baidu.com/13123.jpg");
 		List<Item> list = new ArrayList<Item>();
 		list.add(item2);
 		list.add(item3);

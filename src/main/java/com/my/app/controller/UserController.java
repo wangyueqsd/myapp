@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("user")
 public class UserController extends BaseController {
 
-	@Resource
+	@Resource(name = "userServiceImpl")
 	UserService userService;
 	
 	@Resource

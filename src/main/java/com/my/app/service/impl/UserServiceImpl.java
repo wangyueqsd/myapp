@@ -19,7 +19,7 @@ import com.my.app.entity.FrontAccountInfoExample;
 import com.my.app.service.UserService;
 import com.my.app.vo.request.RequestVo;
 
-@Service
+@Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 
 	@Resource
