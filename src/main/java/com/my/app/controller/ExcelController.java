@@ -51,7 +51,8 @@ public class ExcelController extends BaseController {
 	
 	private List<ExcelVo> data() {
 	    List<ExcelVo> list = new ArrayList<ExcelVo>();
-	    for (int i = 0; i < 10; i++) {
+	    int count = 10;
+	    for (int i = 0; i < count; i++) {
 	    	ExcelVo data = new ExcelVo();
 	    	data.setId(Long.valueOf(i));
 	        data.setBankCode("A00"+i);
@@ -91,7 +92,7 @@ public class ExcelController extends BaseController {
             response.reset();
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<String, String>(16);
             map.put("status", "failure");
             map.put("message", "下载文件失败" + e.getMessage());
             response.getWriter().println(JSON.toJSONString(map));

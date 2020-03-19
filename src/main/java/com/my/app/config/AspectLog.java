@@ -50,7 +50,7 @@ public class AspectLog {
 		// 获取所有请求参数
 		Object[] args = pjp.getArgs();
 		// 解析请求参数
-		Map<String, Object> requestMap = new HashMap<String, Object>();
+		Map<String, Object> requestMap = new HashMap<String, Object>(16);
 		if ("POST".equals(request.getMethod())) {
 			for (Object obj : args) {
 				// 为字符串

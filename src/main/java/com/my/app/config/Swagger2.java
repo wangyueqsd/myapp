@@ -22,7 +22,10 @@ public class Swagger2 {
         		.enable(swagger2Enable)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.my.app.controller"))//controller路径
+                /**
+                 * controller路径
+                 */
+                .apis(RequestHandlerSelectors.basePackage("com.my.app.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

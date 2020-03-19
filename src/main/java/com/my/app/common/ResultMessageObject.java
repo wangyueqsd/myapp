@@ -99,7 +99,7 @@ public class ResultMessageObject implements Serializable {
 
 	public Map<String, Object> getData() {
 		if (data == null) {
-			data = new HashMap<String, Object>();
+			data = new HashMap<String, Object>(16);
 		}
 
 		return data;

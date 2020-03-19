@@ -181,8 +181,9 @@ public class CommonUtil {
 	 * @return
 	 */
 	public static String printException(Throwable thr) {
-		if (thr == null)
+		if (thr == null) {
 			return null;
+		}
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			thr.printStackTrace(new PrintStream(baos));
@@ -190,12 +191,13 @@ public class CommonUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (baos != null)
+			if (baos != null) {
 				try {
 					baos.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}
 		}
 		return baos.toString();
 	}
@@ -295,8 +297,9 @@ public class CommonUtil {
 	 * @return
 	 */
 	public static boolean emptyParams(String... params) {
-		if (params.length < 1)
+		if (params.length < 1) {
 			return true;
+		}
 		for (String str : params) {
 			if (StringUtils.isBlank(str)) {
 				return true;
@@ -349,8 +352,9 @@ public class CommonUtil {
 				sb.append("*");
 			}
 
-			if (rep.equals(sb.toString()))
+			if (rep.equals(sb.toString())) {
 				return bankNumber;
+			}
 			// 要替换的内容，替换为内容
 			return bankNumber.replace(rep, sb.toString());
 		} else {
@@ -421,10 +425,10 @@ public class CommonUtil {
 	 * @return
 	 */
 	public static String createPATradeFlow(String masterId) {
-		lock.lock();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
+		lock.lock();
 		try {
 			StringBuffer sbf = new StringBuffer();
 
